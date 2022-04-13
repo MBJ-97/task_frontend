@@ -91,12 +91,14 @@ export default function createProduct() {
 
         <label htmlFor="type">Type</label>
         <select
-          className="mb-4 outline-none rounded h-12 px-6 border-2 border-black focus:border-emerald-500 focus:bg-emerald-500"
+          className="mb-4 outline-none rounded h-12 px-6 border-2 border-black focus:border-emerald-500"
           name="type"
           onChange={handleChange}
           id="type"
         >
-          <option value="">Choose type</option>
+          <option value="" selected>
+            Choose type
+          </option>
           <option value="book">Book</option>
           <option value="disc">Disc</option>
           <option value="furniture">Furniture</option>

@@ -4,11 +4,19 @@ import disc from "../public/compact-disk.png";
 import furniture from "../public/table.png";
 import book from "../public/open-book.png";
 
-export default function ProductCard({ productData }) {
-  const [checked, setChecked] = useState(true);
+export default function ProductCard({
+  productData,
+  checkboxInfos,
+  setCheckboxInfos,
+}) {
+  //get fields lengths
+  const count = productData.length;
 
-  const toggleChecked = () => {
-    setChecked = !checked;
+  // handle on Change
+  const handleOnChange = (position) => {
+    const updatedCheckedState = checked.map((item, index) =>
+      index === position ? !item : item
+    );
   };
 
   //Custom Illustration and Infos by product category
@@ -55,9 +63,11 @@ export default function ProductCard({ productData }) {
         </div>
         <div className="checkbox-image flex flex-col items-center justify-between w-1/3">
           <input
-            id={id}
-            checked={checked}
-            onChange={toggleChecked}
+            id={sku}
+            // checked={checked}
+            onChange={() => {
+              handleOnChange(index);
+            }}
             className="w-5 h-5 mb-8"
             type="checkbox"
           />
