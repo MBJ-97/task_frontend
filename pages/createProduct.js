@@ -1,11 +1,37 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 export default function createProduct() {
-  const [type, setType] = useState(""); //HANDLE FORM DATA see traversy tutorial
+  const router = useRouter();
 
-  const handleChange = (e) => {
-    setType(e.target.value);
+  //controlled components
+  const [formData, setFormData] = useState({});
+
+  //extract all those
+  const { sku, name, price, size, weight, height, length, width, type } =
+    formData;
+
+  // on mutate
+  const onMutate = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   };
+  // on submit action
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const res = await axios.post(
+      "https://scandiweb-task-mbj.000webhostapp.com/api/create.php",
+      JSON.stringify(formData)
+    );
+
+    router.push("/");
+  };
+
   // render changing form part
   let customPart;
 
@@ -18,6 +44,7 @@ export default function createProduct() {
           type="number"
           name="weight"
           id="weight"
+          onChange={onMutate}
         />
       </>
     );
@@ -30,6 +57,7 @@ export default function createProduct() {
           type="number"
           name="size"
           id="size"
+          onChange={onMutate}
         />
       </>
     );
@@ -42,6 +70,7 @@ export default function createProduct() {
           type="number"
           name="height"
           id="height"
+          onChange={onMutate}
         />
         <label htmlFor="price">Width</label>
         <input
@@ -49,6 +78,7 @@ export default function createProduct() {
           type="number"
           name="width"
           id="width"
+          onChange={onMutate}
         />
         <label htmlFor="price">Length</label>
         <input
@@ -56,6 +86,7 @@ export default function createProduct() {
           type="number"
           name="length"
           id="length"
+          onChange={onMutate}
         />
       </>
     );
@@ -64,13 +95,14 @@ export default function createProduct() {
     <div className="max-w-5xl mx-auto px-6 sm:px-0">
       <h1 className="text-3xl font-semibold my-8">Add a product</h1>
 
-      <form action="" className="flex flex-col mb-36">
+      <form onSubmit={handleSubmit} className="flex flex-col mb-36">
         <label htmlFor="sku">SKU</label>
         <input
           className="mb-4 outline-none rounded h-12 px-6 border-2 border-black focus:border-emerald-500"
           type="text"
           name="sku"
           id="sku"
+          onChange={onMutate}
         />
 
         <label htmlFor="name">Name</label>
@@ -79,6 +111,7 @@ export default function createProduct() {
           type="text"
           name="name"
           id="name"
+          onChange={onMutate}
         />
 
         <label htmlFor="price">Price</label>
@@ -87,16 +120,17 @@ export default function createProduct() {
           type="number"
           name="price"
           id="price"
+          onChange={onMutate}
         />
 
         <label htmlFor="type">Type</label>
         <select
           className="mb-4 outline-none rounded h-12 px-6 border-2 border-black focus:border-emerald-500"
           name="type"
-          onChange={handleChange}
+          onChange={onMutate}
           id="type"
         >
-          <option value="" selected>
+          <option value="" defaultValue>
             Choose type
           </option>
           <option value="book">Book</option>

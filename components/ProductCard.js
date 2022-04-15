@@ -12,6 +12,9 @@ export default function ProductCard({
   //get fields lengths
   const count = productData.length;
 
+  //temp solve the error
+  const [checked, setChecked] = useState("");
+
   // handle on Change
   const handleOnChange = (position) => {
     const updatedCheckedState = checked.map((item, index) =>
