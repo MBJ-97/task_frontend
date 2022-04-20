@@ -168,7 +168,7 @@ export default function CreateProduct() {
         <input
           className="w-1/2 sm:w-1/4 mt-8 px-6 h-14 text-emerald-500 border-2 border-emerald-500 rounded-xl hover:bg-emerald-500 hover:text-white transition ease-in-out delay-50"
           type="submit"
-          value="Submit"
+          value="ADD"
         />
         <button
           onClick={handleCancel}

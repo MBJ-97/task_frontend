@@ -58,7 +58,7 @@ export default function ProductList({ products }) {
           onClick={deleteProducts}
           id="delete-product-btn"
         >
-          Delete
+          MASS DELETE
         </button>
       </div>
       <div className="flex flex-wrap gap-4">
