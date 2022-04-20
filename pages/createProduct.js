@@ -7,6 +7,7 @@ export default function CreateProduct() {
 
   //controlled components
   const [formData, setFormData] = useState({});
+  const [errMsg, setErrMsg] = useState("");
 
   //extract all those
   const { sku, name, price, size, weight, height, length, width, type } =
@@ -30,8 +31,7 @@ export default function CreateProduct() {
     );
 
     const res = req.data;
-    alert(res.message);
-    router.push("/");
+    setErrMsg(res.message);
   };
 
   // handle cancel action
@@ -109,6 +109,7 @@ export default function CreateProduct() {
   return (
     <div className="max-w-5xl mx-auto px-6 sm:px-0 w-full">
       <h1 className="text-3xl font-semibold my-8">Add a product</h1>
+      <small className="font-bold text-red-700 mb-12">{errMsg}</small>
 
       <form
         id="product_form"
