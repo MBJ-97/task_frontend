@@ -107,7 +107,7 @@ export default function CreateProduct() {
     );
   }
   return (
-    <div className="max-w-5xl mx-auto px-6 sm:px-0">
+    <div className="max-w-5xl mx-auto px-6 sm:px-0 w-full">
       <h1 className="text-3xl font-semibold my-8">Add a product</h1>
 
       <form

@@ -1,10 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,400;0,500;0,600;0,700;1,100;1,400;1,500;1,600;1,700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;300;400;500;600;700&display=swap");
-
 html {
-  font-family: "IBM Plex Mono" !important;
+  font-family: "IBM Plex Mono", monospace;
   transition: 2s;
 }
