@@ -158,7 +158,7 @@ export default function CreateProduct() {
             Choose type
           </option>
           <option value="book">Book</option>
-          <option value="disc">Disc</option>
+          <option value="disc">DVD</option>
           <option value="furniture">Furniture</option>
         </select>
 
@@ -169,7 +169,7 @@ export default function CreateProduct() {
           className="w-1/2 sm:w-1/4 mt-8 px-6 h-14 text-emerald-500 border-2 border-emerald-500 rounded-xl hover:bg-emerald-500 hover:text-white transition ease-in-out delay-50"
           type="submit"
         >
-          ADD
+          Save
         </button>
         <button
           onClick={handleCancel}

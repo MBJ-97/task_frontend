@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <footer className="h-20 mt-16 bg-emerald-500">
+    <footer className="sticky top-[100vh] h-20 mt-16 bg-emerald-500">
       <p className=" pt-8 flex items-center justify-center">
         Made with {"<3"} by &nbsp;{" "}
         <a
