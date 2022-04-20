@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 
-export default function createProduct() {
+export default function CreateProduct() {
   const router = useRouter();
 
   //controlled components
