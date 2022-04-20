@@ -2,8 +2,6 @@ import ProductList from "../components/ProductList";
 import { useState } from "react";
 
 export default function Home({ products }) {
-  //console.log(products);
-
   return (
     <div className="max-w-5xl mx-auto">
       <ProductList products={products} />

@@ -9,40 +9,35 @@ export default function ProductCard({
   checkboxInfos,
   setCheckboxInfos,
 }) {
-  //get fields lengths
-  const count = productData.length;
-
   //temp solve the error
   const [checked, setChecked] = useState("");
 
-  // handle on Change
-  const handleOnChange = (position) => {
-    const updatedCheckedState = checked.map((item, index) =>
-      index === position ? !item : item
-    );
-  };
-
-  //Custom Illustration and Infos by product category
   const { id, sku, name, price, type, size, weight, height, length, width } =
     productData;
 
-  let physicalInfos;
+  let productProps;
   let image;
 
   if (type == "furniture") {
-    physicalInfos = `Dimensions: ${height}x${width}x${length}`;
+    productProps = `Dimensions: ${height}x${width}x${length}`;
     image = (
-      <Image src={furniture} layout="fixed" width={50} height={50} alt="type" />
+      <Image
+        src={furniture}
+        layout="fixed"
+        width={50}
+        height={50}
+        alt="furniture"
+      />
     );
   } else if (type == "book") {
-    physicalInfos = `Weight: ${weight}KG`;
+    productProps = `Weight: ${weight}KG`;
     image = (
-      <Image src={book} layout="fixed" width={50} height={50} alt="type" />
+      <Image src={book} layout="fixed" width={50} height={50} alt="book" />
     );
   } else {
-    physicalInfos = `Size: ${size}MB`;
+    productProps = `Size: ${size}MB`;
     image = (
-      <Image src={disc} layout="fixed" width={50} height={50} alt="type" />
+      <Image src={disc} layout="fixed" width={50} height={50} alt="disc" />
     );
   }
 
@@ -61,17 +56,23 @@ export default function ProductCard({
             <li>SKU: {sku}</li>
             <li>{name}</li>
             <li>{price} $</li>
-            <li>{physicalInfos}</li>
+            <li>{productProps}</li>
           </ul>
         </div>
         <div className="checkbox-image flex flex-col items-center justify-between w-1/3">
           <input
-            id={sku}
-            // checked={checked}
-            onChange={() => {
-              handleOnChange(index);
+            onChange={(e) => {
+              let checked = e.target.checked;
+              setCheckboxInfos(
+                checkboxInfos.map((c) => {
+                  if (c.id === id) {
+                    c.select = checked;
+                  }
+                  return c;
+                })
+              );
             }}
-            className="w-5 h-5 mb-8"
+            className="delete-checkbox w-5 h-5 mb-8"
             type="checkbox"
           />
           {image}

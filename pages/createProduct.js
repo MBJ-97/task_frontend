@@ -24,11 +24,19 @@ export default function createProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await axios.post(
+    const req = await axios.post(
       "https://scandiweb-task-mbj.000webhostapp.com/api/create.php",
       JSON.stringify(formData)
     );
 
+    const res = req.data;
+    alert(res.message);
+    router.push("/");
+  };
+
+  // handle cancel action
+  const handleCancel = (e) => {
+    e.preventDefault();
     router.push("/");
   };
 
@@ -45,6 +53,8 @@ export default function createProduct() {
           name="weight"
           id="weight"
           onChange={onMutate}
+          required
+          step={0.01}
         />
       </>
     );
@@ -58,6 +68,8 @@ export default function createProduct() {
           name="size"
           id="size"
           onChange={onMutate}
+          required
+          step={0.01}
         />
       </>
     );
@@ -71,6 +83,7 @@ export default function createProduct() {
           name="height"
           id="height"
           onChange={onMutate}
+          required
         />
         <label htmlFor="price">Width</label>
         <input
@@ -79,6 +92,7 @@ export default function createProduct() {
           name="width"
           id="width"
           onChange={onMutate}
+          required
         />
         <label htmlFor="price">Length</label>
         <input
@@ -87,6 +101,7 @@ export default function createProduct() {
           name="length"
           id="length"
           onChange={onMutate}
+          required
         />
       </>
     );
@@ -95,7 +110,11 @@ export default function createProduct() {
     <div className="max-w-5xl mx-auto px-6 sm:px-0">
       <h1 className="text-3xl font-semibold my-8">Add a product</h1>
 
-      <form onSubmit={handleSubmit} className="flex flex-col mb-36">
+      <form
+        id="product_form"
+        onSubmit={handleSubmit}
+        className="flex flex-col mb-36"
+      >
         <label htmlFor="sku">SKU</label>
         <input
           className="mb-4 outline-none rounded h-12 px-6 border-2 border-black focus:border-emerald-500"
@@ -103,6 +122,7 @@ export default function createProduct() {
           name="sku"
           id="sku"
           onChange={onMutate}
+          required
         />
 
         <label htmlFor="name">Name</label>
@@ -112,6 +132,7 @@ export default function createProduct() {
           name="name"
           id="name"
           onChange={onMutate}
+          required
         />
 
         <label htmlFor="price">Price</label>
@@ -121,6 +142,8 @@ export default function createProduct() {
           name="price"
           id="price"
           onChange={onMutate}
+          required
+          step={0.1}
         />
 
         <label htmlFor="type">Type</label>
@@ -128,7 +151,8 @@ export default function createProduct() {
           className="mb-4 outline-none rounded h-12 px-6 border-2 border-black focus:border-emerald-500"
           name="type"
           onChange={onMutate}
-          id="type"
+          id="productType"
+          required
         >
           <option value="" defaultValue>
             Choose type
@@ -138,6 +162,7 @@ export default function createProduct() {
           <option value="furniture">Furniture</option>
         </select>
 
+        {/* Dynamic form inputs come here  */}
         {customPart}
 
         <input
@@ -145,6 +170,12 @@ export default function createProduct() {
           type="submit"
           value="Submit"
         />
+        <button
+          onClick={handleCancel}
+          className="w-1/2 sm:w-1/4 mt-3 px-6 h-14 text-gray-500 border-2 border-gray-500 rounded-xl hover:bg-gray-500 hover:text-white transition ease-in-out delay-50"
+        >
+          Cancel
+        </button>
       </form>
     </div>
   );
