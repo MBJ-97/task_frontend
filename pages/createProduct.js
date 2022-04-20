@@ -165,11 +165,12 @@ export default function CreateProduct() {
         {/* Dynamic form inputs come here  */}
         {customPart}
 
-        <input
+        <button
           className="w-1/2 sm:w-1/4 mt-8 px-6 h-14 text-emerald-500 border-2 border-emerald-500 rounded-xl hover:bg-emerald-500 hover:text-white transition ease-in-out delay-50"
           type="submit"
-          value="ADD"
-        />
+        >
+          ADD
+        </button>
         <button
           onClick={handleCancel}
           className="w-1/2 sm:w-1/4 mt-3 px-6 h-14 text-gray-500 border-2 border-gray-500 rounded-xl hover:bg-gray-500 hover:text-white transition ease-in-out delay-50"
