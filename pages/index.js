@@ -7,39 +7,31 @@ export default function Home({ products }) {
   const [checkboxInfos, setCheckboxInfos] = useState([]);
   const router = useRouter();
 
-  const wrappedEffect = () => {
-    useEffect(() => {
-      if (products?.length > 0) {
-        setCheckboxInfos(
-          products.map((p) => {
-            return {
-              select: false,
-              id: p.id,
-              sku: p.sku,
-              name: p.name,
-              price: p.price,
-              type: p.type,
-              size: p.size,
-              weight: p.weight,
-              height: p.height,
-              width: p.width,
-              length: p.length,
-            };
-          })
-        );
-      }
+  useEffect(() => {
+    if (products?.length !== 0) {
+      setCheckboxInfos(
+        products?.map((p) => {
+          return {
+            select: false,
+            id: p.id,
+            sku: p.sku,
+            name: p.name,
+            price: p.price,
+            type: p.type,
+            size: p.size,
+            weight: p.weight,
+            height: p.height,
+            width: p.width,
+            length: p.length,
+          };
+        })
+      );
+    }
 
-      return () => {
-        console.log("This will be logged on unmount");
-      };
-    }, [products]);
-  };
-
-  if (products !== null) {
-    return false;
-  } else {
-    wrappedEffect();
-  }
+    return () => {
+      console.log("This will be logged on unmount");
+    };
+  }, [products]);
 
   // delete products by ID
   const deleteProducts = async () => {
