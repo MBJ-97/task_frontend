@@ -6,28 +6,33 @@ import { useRouter } from "next/router";
 export default function Home({ products }) {
   const [checkboxInfos, setCheckboxInfos] = useState([]);
   const router = useRouter();
+  if (products !== null) {
+    useEffect(() => {
+      if (products.length > 0) {
+        setCheckboxInfos(
+          products.map((p) => {
+            return {
+              select: false,
+              id: p.id,
+              sku: p.sku,
+              name: p.name,
+              price: p.price,
+              type: p.type,
+              size: p.size,
+              weight: p.weight,
+              height: p.height,
+              width: p.width,
+              length: p.length,
+            };
+          })
+        );
+      } else return false;
 
-  useEffect(() => {
-    if (products.length > 0) {
-      setCheckboxInfos(
-        products.map((p) => {
-          return {
-            select: false,
-            id: p.id,
-            sku: p.sku,
-            name: p.name,
-            price: p.price,
-            type: p.type,
-            size: p.size,
-            weight: p.weight,
-            height: p.height,
-            width: p.width,
-            length: p.length,
-          };
-        })
-      );
-    } else return false;
-  }, [products]);
+      return () => {
+        console.log("This will be logged on unmount");
+      };
+    }, [products]);
+  }
 
   // delete products by ID
   const deleteProducts = async () => {
@@ -54,9 +59,9 @@ export default function Home({ products }) {
     <div className="max-w-5xl mx-auto">
       <div className="mt-16 flex flex-col">
         <div className="flex justify-between mb-10 w-full">
-          <h2 className="text-2xl font-semibold">Products list</h2>
+          <h2 className="text-2xl font-semibold mr-0 sm:mr-6">Products list</h2>
           <button
-            className="bg-red-400 text-white px-6 h-14 rounded-xl"
+            className="bg-red-400 text-white px-6 h-14 rounded-xl ml-0 sm:ml-6"
             onClick={deleteProducts}
             id="delete-product-btn"
           >
@@ -64,7 +69,7 @@ export default function Home({ products }) {
           </button>
         </div>
         <div className="flex flex-wrap gap-4">
-          {products.length > 0 ? (
+          {products?.length > 0 ? (
             products.map((product) => (
               <ProductCard
                 key={product.id}
@@ -74,7 +79,7 @@ export default function Home({ products }) {
               />
             ))
           ) : (
-            <p>No posts to display</p>
+            <p>No products to display</p>
           )}
         </div>
       </div>
@@ -83,17 +88,17 @@ export default function Home({ products }) {
 }
 
 export async function getServerSideProps() {
-  let products;
+  let products = {};
   const res = await fetch(
     "https://scandiweb-task-mbj.000webhostapp.com/api/read.php"
   );
-  const result = await res.json();
+  const result = await res?.json();
 
   products = result.data;
 
   return {
     props: {
-      products,
+      products: result.data || null,
     },
   };
 }
