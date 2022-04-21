@@ -57,7 +57,7 @@ export default function Home({ products }) {
   return (
     <div className="max-w-5xl mx-auto">
       <div className="mt-16 flex flex-col">
-        <div className="flex justify-between mb-10 w-full">
+        <div className="flex justify-between items-center mb-10 w-full">
           <h2 className="text-2xl font-semibold mr-0 sm:mr-6">Products list</h2>
           <button
             className="bg-red-400 text-white px-6 h-14 rounded-xl ml-0 sm:ml-6"
