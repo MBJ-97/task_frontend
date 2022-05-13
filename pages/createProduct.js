@@ -13,7 +13,7 @@ export default function CreateProduct() {
   const { sku, name, price, size, weight, height, length, width, type } =
     formData;
 
-  //specific product api route
+  //specific api route for each product
   const [apiRoute, setApiRoute] = useState("");
   const switchRoute = () => {
     if (type === "book") {
