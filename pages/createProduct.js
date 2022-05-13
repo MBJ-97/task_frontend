@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 
@@ -13,6 +13,21 @@ export default function CreateProduct() {
   const { sku, name, price, size, weight, height, length, width, type } =
     formData;
 
+  //specific product api route
+  const [apiRoute, setApiRoute] = useState("");
+  const switchRoute = () => {
+    if (type === "book") {
+      setApiRoute("Book");
+    } else if (type == "disc") {
+      setApiRoute("Disc");
+    } else if ("furniture") {
+      setApiRoute("Furniture");
+    }
+  };
+  useEffect(() => {
+    switchRoute();
+  }, [type]);
+
   // on mutate
   const onMutate = (e) => {
     setFormData((prevState) => ({
@@ -26,7 +41,7 @@ export default function CreateProduct() {
     e.preventDefault();
 
     const req = await axios.post(
-      "https://scandiweb-task-mbj.000webhostapp.com/api/create.php",
+      `https://scandiweb-task-mbj.000webhostapp.com/api/create${apiRoute}.php`,
       JSON.stringify(formData)
     );
 
